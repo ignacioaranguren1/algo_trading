@@ -1,5 +1,6 @@
 from .trader import Trader
 from .config import LOGGING_CONFIG, LOGGING_CONFIG_UNSET
+from .actions import Actions
 from termcolor import colored
 
 import logging.config
@@ -33,7 +34,6 @@ class Environment(object):
             # Main thread needs to wait for strat_dict to be able to obtain the information to be displayed in the interface
             # below
             pass
-        # stract_dict initialized in trader thread. Launch main interface
         self.init_interface()
 
     def init_interface(self):
@@ -51,13 +51,13 @@ class Environment(object):
                     print(f"Select the strategy to be killed: {list(self.trader.strat_dict.keys())}")
                     strgy = int(input())
                     if 'STRGY_' + str(strgy) in self.trader.strat_dict.keys():
-                        self.trader.kill_strategy(strgy)
+                        self.trader.interaction_manager(Actions.KILL_STRGY, strgy=strgy)
                     else:
                         print('Incorrect strategy')
                 elif int(option) == 2:
                     print('Select number of generators: ')
                     num_gen = int(input())
-                    self.trader.add_strategy(num_gen)
+                    self.trader.interaction_manager(Actions.ADD_STRGY, gen=num_gen)
                 elif int(option) == 3:
                     print(f"Select strategy: {list(self.trader.strat_dict.keys())}")
                     strgy = int(input())
@@ -65,7 +65,7 @@ class Environment(object):
                         print(f"Select generator: {list(self.trader.strat_dict['STRGY_' + str(strgy)].gen_dict.keys())}")
                         gen = int(input())
                         if 'GEN_' + str(gen) in self.trader.strat_dict['STRGY_' + str(strgy)].gen_dict.keys():
-                            self.trader.kill_generator(strgy, gen)
+                            self.trader.interaction_manager(Actions.KILL_GEN, strgy=strgy, gen=gen)
                         else:
                             print('Generator not found in strategy.')
                     else:
@@ -74,7 +74,7 @@ class Environment(object):
                     print(f"Select the strategy to be modfied: {list(self.trader.strat_dict.keys())}")
                     strgy = int(input())
                     if 'STRGY_' + str(strgy) in self.trader.strat_dict.keys():
-                        self.trader.add_generator(strgy)
+                        self.trader.interaction_manager(Actions.ADD_GEN, strgy=strgy)
                     else:
                         print('Incorrect strategy')
             except ValueError as e:
