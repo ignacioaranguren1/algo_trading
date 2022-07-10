@@ -28,6 +28,10 @@ class Environment(object):
         self.init_interface()
 
     def init_trader(self):
+        """
+        Launch trader thread.
+        :return:
+        """
         self.trader = Trader(self.num_strategies, self.num_generators)
         self.trader.start()
         while None in self.trader.strat_dict.values():
@@ -37,6 +41,11 @@ class Environment(object):
         self.init_interface()
 
     def init_interface(self):
+        """
+        Initialize main interface. The interface interact with the trader Thread by sending actions to modify generators
+        and strategies.
+        :return:
+        """
         self.logger.info(colored('main interface initiated', 'green'))
         while True:
             self.print_output()
@@ -45,47 +54,69 @@ class Environment(object):
                 option = input()
                 if option == 'q' or option == 'Q':
                     continue
-                elif int(option) not in [1, 2, 3, 4]:
-                    print('Option not available')
                 elif int(option) == 1:
-                    print(f"Select the strategy to be killed: {list(self.trader.strat_dict.keys())}")
-                    strgy = int(input())
-                    if 'STRGY_' + str(strgy) in self.trader.strat_dict.keys():
-                        self.trader.interaction_manager(Actions.KILL_STRGY, strgy=strgy)
-                    else:
-                        print('Incorrect strategy')
+                    self._kill_strgy()
                 elif int(option) == 2:
-                    print('Select number of generators: ')
-                    num_gen = int(input())
-                    self.trader.interaction_manager(Actions.ADD_STRGY, gen=num_gen)
+                    self._add_strgy()
                 elif int(option) == 3:
-                    print(f"Select strategy: {list(self.trader.strat_dict.keys())}")
-                    strgy = int(input())
-                    if 'STRGY_' + str(strgy) in self.trader.strat_dict.keys():
-                        print(f"Select generator: {list(self.trader.strat_dict['STRGY_' + str(strgy)].gen_dict.keys())}")
-                        gen = int(input())
-                        if 'GEN_' + str(gen) in self.trader.strat_dict['STRGY_' + str(strgy)].gen_dict.keys():
-                            self.trader.interaction_manager(Actions.KILL_GEN, strgy=strgy, gen=gen)
-                        else:
-                            print('Generator not found in strategy.')
-                    else:
-                        print('Incorrect strategy')
+                    self._kill_gen()
+                elif int(option) == 4:
+                    self._add_gen()
                 else:
-                    print(f"Select the strategy to be modfied: {list(self.trader.strat_dict.keys())}")
-                    strgy = int(input())
-                    if 'STRGY_' + str(strgy) in self.trader.strat_dict.keys():
-                        self.trader.interaction_manager(Actions.ADD_GEN, strgy=strgy)
-                    else:
-                        print('Incorrect strategy')
-            except ValueError as e:
-                self.logger.info(colored(e, 'red'))
+                    print('Option not available')
+            except ValueError:
+                self.logger.info(colored('Incorrect input value', 'red'))
+
+    def _kill_strgy(self):
+        """
+        Send kill strategy action to trader thread
+        :return:
+        """
+        print(f"Select the strategy to be killed: {list(self.trader.strat_dict.keys())}")
+        strgy = int(input())
+        self.trader.interaction_manager(Actions.KILL_STRGY, strgy=strgy)
+
+    def _add_strgy(self):
+        """
+        Send add strategy action to trader thread
+        :return:
+        """
+        print('Select number of generators: ')
+        num_gen = int(input())
+        self.trader.interaction_manager(Actions.ADD_STRGY, gen=num_gen)
+
+    def _kill_gen(self):
+        """
+        Send kill generator action to trader thread
+        :return:
+        """
+        print(f"Select strategy: {list(self.trader.strat_dict.keys())}")
+        strgy = int(input())
+        if 'STRGY_' + str(strgy) in self.trader.strat_dict.keys():
+            print(f"Select generator: {list(self.trader.strat_dict['STRGY_' + str(strgy)].gen_dict.keys())}")
+            gen = int(input())
+            self.trader.interaction_manager(Actions.KILL_GEN, strgy=strgy, gen=gen)
+        else:
+            print('Incorrect strategy')
+
+    def _add_gen(self):
+        """
+        Send add strategy action to trader thread
+        :return:
+        """
+        print(f"Select the strategy to be modified: {list(self.trader.strat_dict.keys())}")
+        strgy = int(input())
+        self.trader.interaction_manager(Actions.ADD_GEN, strgy=strgy)
 
     def print_output(self):
+        """
+        Display on output actions available
+        :return:
+        """
         # Formaters definition and header
         format_string = "{:<25}{:<15}"
         format_header = colored("{:<25}{:<15}", 'blue')
         header = ['STRATEGY ID', 'NUMBER OF GENERATORS']
-
         # Output layout definition
         print(f"\n----------------------------------------------------------------")
         print(f'Number of strategies: {self.num_strategies}')
@@ -99,13 +130,15 @@ class Environment(object):
         for strgy in self.trader.strat_dict.keys():
             out = [strgy, len(self.trader.strat_dict[strgy].gen_dict)]
             print(format_string.format(*out))
+        # Print actions
         print(
             f"\n {colored('Available actions: ', 'blue')}\n\n"
             f"    - {colored('(1)', 'blue')} Kill current strategy\n"
             f"    - {colored('(2)', 'blue')} Add new strategy \n"
             f"    - {colored('(3)', 'blue')} Kill a strategy's generator\n"
             f"    - {colored('(4)', 'blue')} Add new generator to current strategy.\n"
-            f"    - {colored('(q)', 'blue')} Print output\n")
+            f"    - {colored('(q)', 'blue')} Print output\n"
+        )
 
 
 

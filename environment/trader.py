@@ -41,7 +41,7 @@ class Trader(Thread):
     def run(self):
         """
         Run method from parent overridden.
-        :return: None
+        :return:
         """
         for strategy in range(self.strategies):
             # Init strategy
@@ -76,7 +76,7 @@ class Trader(Thread):
     def get_decisions(self):
         """
         Once a update of decision has been made in every strategy, we need to collect the new values
-        :return: None
+        :return:
         """
         # Get the decisions of each strategy posted in the connector
         decisions = []
@@ -91,7 +91,7 @@ class Trader(Thread):
         :param action:
         :param strgy:
         :param gen:
-        :return: None
+        :return:
         """
         # Lock state
         self.CURRENT = States.BUSY
@@ -107,17 +107,24 @@ class Trader(Thread):
         self.CURRENT = States.IDLE
 
     def _kill_strategy(self, strgy):
-        try:
-            if f'STRGY_{strgy}' in self.strat_dict.keys():
-                self.strat_dict.pop(f'STRGY_{strgy}', None)
-                self.logger.info(colored(f'STRGY_{strgy} killed', 'green'))
-                self.update_cnnrs()
-            else:
-                raise KeyError
-        except KeyError as e:
-            self.logger.info(colored(e, 'red'))
+        """
+        Kill strategy
+        :param strgy:
+        :return:
+        """
+        if f'STRGY_{strgy}' in self.strat_dict.keys():
+            self.strat_dict.pop(f'STRGY_{strgy}', None)
+            self.logger.info(colored(f'STRGY_{strgy} killed', 'green'))
+            self.update_cnnrs()
+        else:
+            self.logger.info(colored(f'Failed to kill strategy. Unknown STRGY_{strgy}', 'red'))
 
     def _add_strategy(self, gen):
+        """
+        Add strategy
+        :param gen:
+        :return:
+        """
         new_strgy = Strategy(gen, f'STRGY_{self.strategies}', self.cnnr)
         new_strgy.start()
         self.strat_dict[f'STRGY_{self.strategies}'] = new_strgy
@@ -126,15 +133,25 @@ class Trader(Thread):
         self.strategies += 1
 
     def _add_generator(self, strgy):
+        """
+        Add generator to an existing strategy
+        :param strgy:
+        :return:
+        """
         if f'STRGY_{strgy}' in self.strat_dict.keys():
             self.strat_dict[f'STRGY_{strgy}'].add_generator()
             self.logger.info(colored(f'New generator created for  STRGY_{strgy}', 'green'))
+        else:
+            self.logger.info(colored(f'Failed to create generator. Unknown STRGY_{strgy}', 'red'))
 
     def _kill_generator(self, strgy, gen):
-        try:
-            if f'STRGY_{strgy}' in self.strat_dict.keys():
-                self.strat_dict[f'STRGY_{strgy}'].kill_generator(gen)
-            else:
-                raise KeyError
-        except KeyError as e:
-            self.logger.info(colored(e, 'red'))
+        """
+        Kill generator of an existing strategy
+        :param strgy:
+        :param gen:
+        :return:
+        """
+        if f'STRGY_{strgy}' in self.strat_dict.keys():
+            self.strat_dict[f'STRGY_{strgy}'].kill_generator(gen)
+        else:
+            self.logger.info(colored(f'Failed to kill generator. Unknown STRGY_{strgy}', 'red'))

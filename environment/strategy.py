@@ -5,7 +5,7 @@ from termcolor import colored
 import time
 import logging
 
-UPDATE_FREQUENCY = 3
+UPDATE_FREQUENCY = 60
 
 class Strategy(Thread):
     def __init__(self, generators, strgy_id, cnnr):
@@ -19,8 +19,8 @@ class Strategy(Thread):
 
     def run(self):
         """
-            Run method from parent overridden.
-        :return: None
+        Run method from parent overridden.
+        :return:
         """
         # Initialize generators
         for generator_id in range(self.generators):
@@ -33,9 +33,9 @@ class Strategy(Thread):
 
     def get_latest_decision(self) -> int:
         """
-            Get the latest decision of each generator. An auxiliary variable is used to make sure that the trader thread
-            does not collect a decision too early
-        :return: None
+        Get the latest decision of each generator. An auxiliary variable is used to make sure that the trader thread
+        does not collect a decision too early
+        :return:
         """
         decision = 0
         for generator in self.gen_dict.keys():
@@ -46,17 +46,24 @@ class Strategy(Thread):
         self.connector = cnnr
 
     def add_generator(self):
+        """
+        Add generator to strategy
+        :return:
+        """
         self.gen_dict[f'GEN_{self.generators}'] = Generator(self.generators)
         self.logger.info(colored(f'GEN_{self.generators} added', 'green'))
         self.generators += 1
 
     def kill_generator(self, gen):
-        try:
-            if f'GEN_{gen}' in self.gen_dict.keys():
-                self.gen_dict.pop(f'GEN_{gen}', None)
-                self.logger.info(colored(f'GEN_{gen} killed', 'green'))
-            else:
-                raise KeyError
-        except KeyError as e:
-            self.logger.info(colored(e, 'red'))
+        """
+        Kill generator of current strategy
+        :param gen:
+        :return:
+        """
+        if f'GEN_{gen}' in self.gen_dict.keys():
+            self.gen_dict.pop(f'GEN_{gen}', None)
+            self.logger.info(colored(f'GEN_{gen} killed', 'green'))
+        else:
+            self.logger.info(colored(f'Failed to kill generator. Unknown GENERATOR {gen}', 'red'))
+
 
