@@ -64,6 +64,6 @@ After selecting action 4 in the interface, a list of the currently available str
  
  ## Print output
  
- Decisions are updated every minute, this can make the interface to not fit in the window. To display the list of actions and strategy info, type the action q. <br><br>
+ Decisions are updated every minute. This can make the interface to not fit in the window. To display the list of actions and strategy info, type the action q. <br><br>
  
  ![alt text](images/print_output.png "Interface")
