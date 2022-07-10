@@ -119,7 +119,7 @@ class Environment(object):
         header = ['STRATEGY ID', 'NUMBER OF GENERATORS']
         # Output layout definition
         print(f"\n----------------------------------------------------------------")
-        print(f'Number of strategies: {self.num_strategies}')
+        print(f'Number of strategies: {len(self.trader.strat_dict)}')
         print(f'Default number of generators: {self.num_generators}')
         print("----------------------------------------------------------------\n")
         print(colored('#######################', 'blue'))
