@@ -1,4 +1,4 @@
-# algo_trading
+# Algorithmic Trader Test
 
 CLI implementation of the algorithmic trader test.
 
