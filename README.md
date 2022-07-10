@@ -51,7 +51,7 @@ After selecting action 2 in the interface, the number of generators of the new s
 ![alt text](images/add_strgy_result.png "Interface")
 
 ## Kill generator flow
-After selecting action 3 in the interface,  a list of the currently available strategies is displayed. Then, the number of the strategy must be introduced. Next, a list displaying all the generators of the selected strategy wil be displayed. Finally, in order to kill the generator the number of one of the generators displayed in the previous step must be displayed.<br><br>
+After selecting action 3 in the interface,  a list of the currently available strategies is displayed. Then, the number of the strategy must be introduced. Next, a list displaying all the generators of the selected strategy wil be displayed. Finally, in order to kill the generator, the number of one of the generators displayed in the previous step must be introduced.<br><br>
 ![alt text](images/kill_gen_flow.png "Interface")
 <br><br>Now information with the remaining updated is displayed.<br><br>
 ![alt text](images/kill_gen_result.png "Interface")
