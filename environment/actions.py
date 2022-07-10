@@ -9,4 +9,3 @@ class Actions(Enum):
     ADD_STRGY = 1
     KILL_GEN = 2
     ADD_GEN = 3
-    

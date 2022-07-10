@@ -42,7 +42,7 @@ class Environment(object):
 
     def init_interface(self):
         """
-        Initialize main interface. The interface interact with the trader Thread by sending actions to modify generators
+        Initialize main interface. The interface interact with the trader thread by sending actions to modify generators
         and strategies.
         :return:
         """
@@ -69,7 +69,7 @@ class Environment(object):
 
     def _kill_strgy(self):
         """
-        Send kill strategy action to trader thread
+        Send kill strategy action to trader thread.
         :return:
         """
         print(f"Select the strategy to be killed: {list(self.trader.strat_dict.keys())}")
@@ -78,7 +78,7 @@ class Environment(object):
 
     def _add_strgy(self):
         """
-        Send add strategy action to trader thread
+        Send add strategy action to trader thread.
         :return:
         """
         print('Select number of generators: ')
@@ -87,7 +87,7 @@ class Environment(object):
 
     def _kill_gen(self):
         """
-        Send kill generator action to trader thread
+        Send kill generator action to trader thread.
         :return:
         """
         print(f"Select strategy: {list(self.trader.strat_dict.keys())}")
@@ -101,7 +101,7 @@ class Environment(object):
 
     def _add_gen(self):
         """
-        Send add strategy action to trader thread
+        Send add strategy action to trader thread.
         :return:
         """
         print(f"Select the strategy to be modified: {list(self.trader.strat_dict.keys())}")
@@ -110,7 +110,7 @@ class Environment(object):
 
     def print_output(self):
         """
-        Display on output actions available
+        Display actions available.
         :return:
         """
         # Formaters definition and header
