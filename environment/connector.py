@@ -2,7 +2,8 @@ class Connector(object):
     """
     A connector object is used to link all the strategy threads and the trader thread. The main reason of using
     this object is to prevent the size of strat_dict in the trader thread to change in the middle of an iteration
-    process. If the dictionary changes an exception will be raised.
+    process. If the dictionary changes an exception will be raised indicating that the dictionary has changed in
+    middle of an iteration.
     """
 
     def __init__(self, strgs):

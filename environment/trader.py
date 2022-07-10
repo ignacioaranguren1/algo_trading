@@ -21,7 +21,7 @@ class States(Enum):
 class Trader(Thread):
     """
     Trader class defines the Trader object. The Trader object inherits from thread class. Thus, concurrency is added
-    to the system to make it possible for the main thread to interact with the strategies and generators
+    to the system to make it possible for the main thread to interact with the strategies and generators.
     """
 
     CURRENT = States.IDLE
@@ -65,7 +65,7 @@ class Trader(Thread):
         Whenever every strategy has posted a decision, we need to override the connector with a new one with all initial
         decisions set to None. A None value means that a strategy has not posted any value yet. Updating the decisions in
         this way makes that check_posted() always finds a consistent set of strategies even when an add/kill action has
-        modified the number of strategies in strat_dict
+        modified the number of strategies in strat_dict.
         :return:
         """
         self.cnnr = Connector(self.strat_dict.keys())
@@ -75,7 +75,7 @@ class Trader(Thread):
 
     def get_decisions(self):
         """
-        Once a update of decision has been made in every strategy, we need to collect the new values
+        Once a update of decision has been made in every strategy, we need to collect the new values.
         :return:
         """
         # Get the decisions of each strategy posted in the connector
@@ -108,7 +108,7 @@ class Trader(Thread):
 
     def _kill_strategy(self, strgy):
         """
-        Kill strategy
+        Kill strategy.
         :param strgy:
         :return:
         """
@@ -121,7 +121,7 @@ class Trader(Thread):
 
     def _add_strategy(self, gen):
         """
-        Add strategy
+        Add strategy.
         :param gen:
         :return:
         """
@@ -134,7 +134,7 @@ class Trader(Thread):
 
     def _add_generator(self, strgy):
         """
-        Add generator to an existing strategy
+        Add generator to an existing strategy.
         :param strgy:
         :return:
         """
@@ -146,7 +146,7 @@ class Trader(Thread):
 
     def _kill_generator(self, strgy, gen):
         """
-        Kill generator of an existing strategy
+        Kill generator of an existing strategy.
         :param strgy:
         :param gen:
         :return:

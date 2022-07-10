@@ -33,8 +33,7 @@ class Strategy(Thread):
 
     def get_latest_decision(self) -> int:
         """
-        Get the latest decision of each generator. An auxiliary variable is used to make sure that the trader thread
-        does not collect a decision too early
+        Get the latest decision of each generator.
         :return:
         """
         decision = 0
@@ -47,7 +46,7 @@ class Strategy(Thread):
 
     def add_generator(self):
         """
-        Add generator to strategy
+        Add generator to strategy.
         :return:
         """
         self.gen_dict[f'GEN_{self.generators}'] = Generator(self.generators)
@@ -56,7 +55,7 @@ class Strategy(Thread):
 
     def kill_generator(self, gen):
         """
-        Kill generator of current strategy
+        Kill generator of current strategy.
         :param gen:
         :return:
         """
