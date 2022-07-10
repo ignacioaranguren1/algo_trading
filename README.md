@@ -2,6 +2,12 @@
 
 CLI implementation of the algorithmic trader test.
 
+## Prerequisites
+
+pip3 install -r requirements.txt
+
+**Note:** It is advised to install the required packages dedicated virtual environment.
+
 ## Command description
 
 **Usage**: <br> cli_interface.py [-h] [--verbose] strategies generators
