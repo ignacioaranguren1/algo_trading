@@ -1,6 +1,6 @@
 # algo_trading
 
-In order to run the software, a CLI has been implemented. 
+CLI implementation of the algorithmic trader test.
 
 ## Command description
 
@@ -33,31 +33,31 @@ In order to run the software, a CLI has been implemented.
 ![alt text](images/decision_update.png "Interface")
 
 ## Kill strategy flow
-After selecting action 1 in the interface, a list of the currently available strategies is displayed. Then, the number of the strategy must be introduced to kill the strategy.
+After selecting action 1 in the interface, a list of the currently available strategies is displayed. Then, the number of the strategy must be introduced to kill the strategy.<br><br>
 ![alt text](images/kill_strgy_flow.png "Interface")
-<br>Now information with the updated strategies is displayed.
+<br><br>Now information with the updated strategies is displayed.<br><br>
 ![alt text](images/kill_strgy_result.png "Interface")
 
 ## Add strategy flow
-After selecting action 2 in the interface, the number of generators of the new strategy must be indicated as input.
+After selecting action 2 in the interface, the number of generators of the new strategy must be indicated as input.<br><br>
 ![alt text](images/add_strgy_flow.png "Interface")
-<br>Now information with the updated strategies is displayed.
+<br><br>Now information with the updated strategies is displayed.<br><br>
 ![alt text](images/add_strgy_result.png "Interface")
 
 ## Kill generator flow
-After selecting action 3 in the interface,  a list of the currently available strategies is displayed. Then, the number of the strategy must be introduced. Then, a list displaying all the generators of the selected strategy wil be displayed. Finally, in order to kill the generator the number of one of the generators displyed in the previous step must be displayed.
+After selecting action 3 in the interface,  a list of the currently available strategies is displayed. Then, the number of the strategy must be introduced. Then, a list displaying all the generators of the selected strategy wil be displayed. Finally, in order to kill the generator the number of one of the generators displyed in the previous step must be displayed.<br><br>
 ![alt text](images/kill_gen_flow.png "Interface")
-<br>Now information with the remaining updated is displayed.
+<br><br>Now information with the remaining updated is displayed.<br><br>
 ![alt text](images/kill_gen_result.png "Interface")
 
 ## Add generator flow
-After selecting action 4 in the interface, a list of the currently available strategies is displayed. Then, the number of the strategy must be introduced and a new genrator will be added to this strategy.
+After selecting action 4 in the interface, a list of the currently available strategies is displayed. Then, the number of the strategy must be introduced and a new genrator will be added to this strategy.<br><br>
 ![alt text](images/add_gen_flow.png "Interface")
-<br>Now information with the updated strategies is displayed.
+<br><br>Now information with the updated strategies is displayed.<br><br>
 ![alt text](images/add_gen_result.png "Interface")
  
  ## Print output
  
- Decisions are updated every minute, this can make the interface to not fit in the window. To display the list of actions and strategy info type the action q. 
+ Decisions are updated every minute, this can make the interface to not fit in the window. To display the list of actions and strategy info type the action q. <br><br>
  
  ![alt text](images/print_output.png "Interface")
