@@ -6,7 +6,7 @@ CLI implementation of the algorithmic trader test.
 
 pip3 install -r requirements.txt
 
-**Note:** It is advised to install the required packages dedicated virtual environment.
+**Note:** It is advised to install the required packages in a dedicated virtual environment.
 
 ## Command description
 
