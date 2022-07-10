@@ -97,7 +97,7 @@ class Environment(object):
             gen = int(input())
             self.trader.interaction_manager(Actions.KILL_GEN, strgy=strgy, gen=gen)
         else:
-            print('Incorrect strategy')
+            self.logger.info(colored(f'STRGY_{strgy} unknown', 'red'))
 
     def _add_gen(self):
         """

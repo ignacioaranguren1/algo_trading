@@ -125,6 +125,9 @@ class Trader(Thread):
         :param gen:
         :return:
         """
+        if gen < 1:
+            self.logger.info(colored(f'Number of generators must be postive. Input: {gen}', 'red'))
+            return
         new_strgy = Strategy(gen, f'STRGY_{self.strategies}', self.cnnr)
         new_strgy.start()
         self.strat_dict[f'STRGY_{self.strategies}'] = new_strgy
