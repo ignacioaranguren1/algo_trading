@@ -18,7 +18,7 @@ pip3 install -r requirements.txt
 
 **Optional arguments:**<br>
   &nbsp;&nbsp;&nbsp; -h, --help  show this help message and exit<br>
-  &nbsp;&nbsp;&nbsp; --verbose   enable output verbosity. If verbosity is not allowd logs will not be displayed and decisions will not show up. Only interactions with the strategies and generators would be available.
+  &nbsp;&nbsp;&nbsp; --verbose   enable output verbosity. If verbosity is not allowed logs will not be displayed and decisions will not show up. Only interactions with the strategies and generators would be available.
   
  **Example**
  
